@@ -19,6 +19,7 @@ export const Game = () => {
   const [xIsNext, setXIsNext] = useState(true);
   const [isGameOver, setIsGameOver] = useState(false);
   const [numberOfTurnsLeft, setNumberOfTurnsLeft] = useState(9);
+  const [winner, setWinner] = useState();
   const winningCombination = [];
 
   const isCellEmpty = (cellIndex) => cellValues[cellIndex] === "";
@@ -31,12 +32,17 @@ export const Game = () => {
       const newNumberOfTurnsLeft = numberOfTurnsLeft - 1;
 
       //Calculate the result
-      const calcResult = calculateWinner(newCellValues, newNumberOfTurnsLeft, cellIndex);
+      const calcResult = calculateWinner(
+        newCellValues,
+        newNumberOfTurnsLeft,
+        cellIndex
+      );
 
       setCellValues(newCellValues);
       setXIsNext(!xIsNext);
       setIsGameOver(calcResult.hasResult);
       setNumberOfTurnsLeft(newNumberOfTurnsLeft);
+      setWinner(calcResult.winner);
     }
   };
 
@@ -50,7 +56,7 @@ export const Game = () => {
           onCellClicked={onCellClicked}
         />
       </div>
-      <ResultModal isGameOver={isGameOver} />
+      <ResultModal isGameOver={isGameOver} winner={winner}/>
     </>
   );
 };
