@@ -1,11 +1,16 @@
 import React from "react";
+import classNames from "classnames";
 import "./ResultModal.css";
 
-export const ResultModal = () => {
+export const ResultModal = (props) => {
+  const resultModalClasses = classNames({
+    "modal-open": props.isGameOver,
+  });
+
   return (
     <>
       <div>
-        <div id="modal-overlay">
+        <div id="modal-overlay" className={resultModalClasses}>
           <div id="game-result-modal">
             <div id="result-container">
               <div id="winner-container">
